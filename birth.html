@@ -44,7 +44,6 @@
   <div class="err" id="err"></div>
   <div class="foot">выбор не всегда очевиден</div>
 <script>
-  var BOT='https://dfymditepnttkcbayjhj.supabase.co/functions/v1/telegram-bot';
   var T=window.Telegram.WebApp;T.ready();T.expand();
   var $=function(id){return document.getElementById(id)};
   var err=function(m){$('err').textContent=m||''};
@@ -59,12 +58,8 @@
     var hh=$('hh').value,mi=$('mi').value;
     if(hh!==''&&(+hh<0||+hh>23)){err('часы 0–23');return}
     if(mi!==''&&(+mi<0||+mi>59)){err('минуты 0–59');return}
-    T.MainButton.showProgress();
-    fetch(BOT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      source:'miniapp',initData:T.initData,
-      data:{type:'birth',day:d,month:m,year:y,hour:hh===''?'':+hh,minute:mi===''?'':+mi,city:$('c').value.trim()}
-    })}).then(function(r){return r.json()}).then(function(res){
-      if(res&&res.ok){T.close()}else{T.MainButton.hideProgress();err('ошибка, попробуй ещё раз')}
-    }).catch(function(){T.MainButton.hideProgress();err('нет связи, попробуй ещё раз')});
+    // sendData — штатный способ мини-аппа вернуть данные боту (доступен только
+    // у web_app-кнопки в reply-клавиатуре); Telegram сам закрывает мини-апп после вызова
+    T.sendData(JSON.stringify({type:'birth',day:d,month:m,year:y,hour:hh===''?'':+hh,minute:mi===''?'':+mi,city:$('c').value.trim()}));
   });
 </script></body></html>
