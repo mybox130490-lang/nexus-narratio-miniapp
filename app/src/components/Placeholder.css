@@ -1,0 +1,17 @@
+.plan { list-style: none; display: flex; flex-direction: column; gap: 0; }
+
+.plan__item {
+  padding: 14px 0;
+  border-top: 1px dashed var(--rule);
+  font-size: var(--step0);
+  color: var(--hint);
+}
+.plan__item:first-child { border-top: 0; }
+.plan__item::before { content: '—'; color: var(--accent-dim); margin-right: 10px; }
+
+.plan__spec {
+  margin-top: var(--gap-m);
+  font-size: var(--step-1);
+  color: var(--faint);
+  letter-spacing: .01em;
+}
