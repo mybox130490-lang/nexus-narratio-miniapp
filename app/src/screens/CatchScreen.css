@@ -68,3 +68,24 @@
   text-transform: uppercase;
   color: var(--accent);
 }
+
+.catch__error {
+  margin-top: var(--gap-m);
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+.catch__crisis {
+  margin-top: var(--gap-m);
+  padding: 16px 16px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--danger) 12%, var(--surface));
+  border: 1px solid var(--danger);
+  color: var(--text);
+  font-size: var(--step0);
+  line-height: 1.6;
+}
