@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { verifyInitData } from '../lib/telegram.ts';
+import { verifyInitData } from './telegram.ts';
 
 const BOT_TOKEN = 'test-bot-token-123';
 

@@ -18,13 +18,13 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import { verifyInitData } from './lib/telegram.ts';
+import { verifyInitData } from '../_shared/telegram.ts';
 import { parseIngestPayload, ValidationError } from './lib/validate.ts';
 import { buildContext } from './lib/context.ts';
 import { extractEntities } from './lib/entities.ts';
 import { scanCrisisMarkers, looksLikeMagicalThinking } from './lib/safety.ts';
 import { toDbMarker } from './lib/safety_marker.ts';
-import { CORS_HEADERS, jsonResponse } from './lib/cors.ts';
+import { CORS_HEADERS, jsonResponse } from '../_shared/cors.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';

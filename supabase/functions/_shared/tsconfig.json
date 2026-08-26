@@ -9,8 +9,7 @@
     "allowImportingTsExtensions": true,
     "lib": ["ES2022", "DOM"],
     "types": ["node"],
-    "typeRoots": ["../../../app/node_modules/@types"],
-    "paths": { "@supabase/supabase-js": ["../../../app/node_modules/@supabase/supabase-js"] }
+    "typeRoots": ["../../../app/node_modules/@types"]
   },
-  "include": ["index.ts", "lib/**/*.ts", "test/**/*.ts", "../_shared/**/*.ts"]
+  "include": ["**/*.ts"]
 }

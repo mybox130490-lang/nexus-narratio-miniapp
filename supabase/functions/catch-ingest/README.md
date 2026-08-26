@@ -25,17 +25,26 @@ lib/
   safety_marker.ts       сопоставление маркеров с enum safety_marker в базе
   cors.ts                CORS-заголовки и обёртка jsonResponse
 test/                   тесты для всех lib/*.ts на node:test
-tsconfig.json           typecheck lib/ и test/ обычным tsc (не для index.ts)
+tsconfig.json           typecheck lib/, test/ и index.ts обычным tsc (см. ниже про Deno.env/serve)
 ```
 
-## Почему index.ts не тестируется здесь напрямую
+## Почему index.ts не тестируется юнитами, но типы у него проверяются
 
 `index.ts` — единственный файл, завязанный на Deno-рантайм (`Deno.serve`,
 `Deno.env.get`, бэрный импорт `@supabase/supabase-js`, разрешаемый через
 `deno.json`). Вся логика, которую имеет смысл тестировать юнитами, вынесена
 в `lib/*.ts` — это чистые функции без побочных эффектов и без Deno-глобалов,
 поэтому они работают и в Deno, и в обычном Node (используют только Web
-Crypto и стандартный JS). `index.ts` — тонкий склеивающий слой поверх них.
+Crypto и стандартный JS). `index.ts` — тонкий склеивающий слой поверх них,
+и юнит-тестами (в Node, без Deno) он не покрыт — только просмотрен вручную.
+
+При этом typecheck у `index.ts` есть: `../_shared/deno_types.d.ts` даёт
+минимальные объявления `Deno.env.get`/`Deno.serve` (ровно то, что реально
+используется), а `paths` в `tsconfig.json` указывает `@supabase/supabase-js`
+на пакет, уже установленный в `app/node_modules` (те же типы, что резолвит
+esm.sh в реальном Deno-рантайме). Это не полноценные типы Deno и не
+гарантия, что рантайм-поведение совпадёт с ожиданием, — но опечатки в
+названиях полей и сигнатурах ловятся до деплоя, а не после.
 
 ## Тесты и типы
 
@@ -43,7 +52,7 @@ Crypto и стандартный JS). `index.ts` — тонкий склеива
 # из корня репозитория
 node --experimental-strip-types --test supabase/functions/catch-ingest/test/*.test.ts
 
-# typecheck lib/ и test/ (index.ts не входит — ему нужны типы Deno)
+# typecheck lib/, test/ и index.ts
 cd supabase/functions/catch-ingest && ../../../app/node_modules/.bin/tsc -p tsconfig.json
 ```
 
