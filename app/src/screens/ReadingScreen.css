@@ -1,0 +1,133 @@
+.reading__hint {
+  font-size: var(--step-1);
+  color: var(--hint);
+  line-height: 1.55;
+}
+
+.reading__retry {
+  padding: 12px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--hint);
+  font-size: var(--step-1);
+}
+
+.reading__text {
+  font-size: var(--step1);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: var(--gap-m);
+  white-space: pre-wrap;
+}
+
+.reading__choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  margin-bottom: var(--gap-m);
+}
+
+.reading__choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: left;
+}
+
+.reading__choice:disabled { opacity: .5; }
+
+.reading__choice-label {
+  font-size: var(--step0);
+  line-height: 1.4;
+}
+
+.reading__choice-cost {
+  font-size: var(--step-2);
+  color: var(--hint);
+  letter-spacing: .02em;
+}
+
+.reading__skip {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 6px 0;
+  font-size: var(--step-1);
+  color: var(--faint);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.reading__task {
+  margin-top: var(--gap-m);
+  padding: 14px 16px;
+  border-left: 2px solid var(--accent-dim);
+  font-size: var(--step-1);
+  color: var(--hint);
+  line-height: 1.5;
+}
+
+.reading__task-label {
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+
+.reading__task-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: var(--step-2);
+  color: var(--faint);
+}
+
+.reading__score {
+  margin-top: var(--gap-m);
+}
+
+.reading__score-row {
+  display: flex;
+  gap: var(--gap-xs);
+  margin-top: var(--gap-s);
+}
+
+.reading__score-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: var(--step0);
+  color: var(--hint);
+}
+
+.reading__score-btn--on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.reading__submit {
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #14110d;
+  font-size: var(--step0);
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.reading__submit:disabled { opacity: .35; cursor: default; }
+
+.reading__error {
+  margin-top: var(--gap-m);
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
