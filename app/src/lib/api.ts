@@ -69,6 +69,38 @@ export async function submitCatch(input: SubmitCatchInput): Promise<SubmitCatchO
   };
 }
 
+// --- generate-scene (supabase/functions/generate-scene) — драматург. ---
+
+export type GenerateSceneOutcome =
+  | { ok: true; runId: string }
+  | { ok: false; reason: 'no_backend' | 'no_telegram' | 'muted' | 'error'; error?: string };
+
+/**
+ * Просит драматурга вырастить историю из одной записи улова. `muted`
+ * означает, что у пользователя активен кризисный протокол (право вето
+ * safety-guardian, supabase/functions/generate-scene/lib/mute_check.ts) —
+ * это не ошибка, а ожидаемый отказ, показывается иначе, чем сбой сети.
+ */
+export async function generateScene(catchId: string): Promise<GenerateSceneOutcome> {
+  if (!hasBackend() || !supabase) return { ok: false, reason: 'no_backend' };
+
+  const initData = tg()?.initData;
+  if (!initData) return { ok: false, reason: 'no_telegram' };
+
+  const { data, error } = await supabase.functions.invoke('generate-scene', {
+    body: { initData, catch_id: catchId },
+  });
+
+  if (error) {
+    const message = await edgeErrorMessage(error);
+    const muted = error instanceof FunctionsHttpError && error.context.status === 403;
+    return { ok: false, reason: muted ? 'muted' : 'error', error: message };
+  }
+  if (data?.error) return { ok: false, reason: 'error', error: data.error as string };
+
+  return { ok: true, runId: data.run.id as string };
+}
+
 // --- run-progress (supabase/functions/run-progress) — экран чтения. ---
 
 export interface ProjectedChoice {

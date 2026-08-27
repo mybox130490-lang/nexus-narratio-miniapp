@@ -61,13 +61,30 @@
 
 .catch__save:disabled { opacity: .35; cursor: default; }
 
-.catch__saved {
+.catch__saved-block {
   margin-top: var(--gap-m);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-s);
+}
+
+.catch__saved {
   font-size: var(--step-1);
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--accent);
 }
+
+.catch__grow {
+  padding: 10px 16px;
+  border: 1px solid var(--accent-dim);
+  border-radius: var(--radius);
+  color: var(--accent);
+  font-size: var(--step-1);
+}
+
+.catch__grow:disabled { opacity: .5; }
 
 .catch__error {
   margin-top: var(--gap-m);
