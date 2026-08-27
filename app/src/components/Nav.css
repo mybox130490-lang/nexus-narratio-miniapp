@@ -1,0 +1,23 @@
+.nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+  background: var(--bg);
+  padding-bottom: var(--safe-bottom);
+}
+
+.nav__item {
+  padding: 13px 4px 14px;
+  text-align: center;
+  font-size: var(--step-1);
+  letter-spacing: .02em;
+  color: var(--faint);
+  text-decoration: none;
+  border-top: 1px solid transparent;
+  margin-top: -1px;
+}
+
+.nav__item--on {
+  color: var(--accent);
+  border-top-color: var(--accent);
+}
